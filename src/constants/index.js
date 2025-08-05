@@ -39,7 +39,7 @@ import {
   
   const services = [
     {
-      title: "Programmer",
+      title: "Sofware Developer",
       icon: web,
     },
     {
@@ -98,7 +98,7 @@ import {
       icon: nodejs,
     },
     {
-      name: "MongoDB",
+      name: "Next JS",
       icon: mongodb,
     },
     {
@@ -208,3 +208,4 @@ import {
   ];
   
   export { services, technologies, experiences, testimonials, projects };
+
