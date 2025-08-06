@@ -35,11 +35,15 @@ import cyber from "./cyber.jpg";
 import cybervidya from "./cybervidya.png";
 import innovate from "./innovate.png";
 import internshala from "./internshala.png";
-import java from "./java.png"
+import java from "./java.png";
+import nextjs from "./nextjs.png";
+import logo2 from "./logo2.png";
 export {
+  logo2,
   mobile,
   internshala,
   java,
+  nextjs,
   innovate,
   cyber,
   cybervidya,
