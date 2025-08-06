@@ -17,9 +17,10 @@ import {
     cyber,
     logo1,
     nodejs,
-    mongodb,
+    nextjs,
     threejs,
     logo,
+    logo2,
   } from "../assets";
   
   export const navLinks = [
@@ -39,16 +40,16 @@ import {
   
   const services = [
     {
-      title: "Sofware Developer",
+      title: "Software Developer",
       icon: web,
-    },
-    {
-      title: "Cyber Security",
-      icon: mobile,
     },
     {
       title: "Web Developer",
       icon: backend,
+    },
+    {
+      title: "Cyber Security",
+      icon: mobile,
     },
     {
       title: "Ethical Hacker",
@@ -99,7 +100,7 @@ import {
     },
     {
       name: "Next JS",
-      icon: mongodb,
+      icon: nextjs,
     },
     {
       name: "Three JS",
@@ -137,6 +138,17 @@ import {
       iconBg: "#383E56",
       date: "August 2024",
       points: [
+        "Underwent intensive training in Java and applied acquired skills by building a complete project, demonstrating proficiency in object-oriented programming, backend logic, and application structure.",
+        "Collaborated with a team to modernize legacy applications by automating containerization and CI/CD workflows using Docker, Kubernetes, and AI-powered tools integrated via Model Context Protocol (MCP) for scalable, cloud-native deployment.",
+      ],
+    },
+    {
+      title: "Software Developer",
+      company_name: "Fidelity International Limited",
+      icon: innovate,
+      iconBg: "#383E56",
+      date: "Jan'25-Jul'25",
+      points: [
         "Gaining valuable insights into the evolving landscape of cybersecurity threats and vulnerabilities, the ethical considerations around developing security tools, and the importance of educating the public on cybersecurity ",
         "Made a project titled “Visualizing Intelligence Analysis and Investigation Techniques” where i have done a security audit on a website and found 14 vulnerabilities.",
       ],
@@ -163,6 +175,27 @@ import {
   ];
   
   const projects = [
+    {
+      name: "A Virtual meeting assistant : MeetAI",
+      description:
+        " MeetAI is an AI-powered platform where users can create their own online agent and engage in interactive meetings with it. Whether it's for brainstorming ideas, asking questions, or getting instant assistance, MeetAI allows you to have a seamless, intelligent conversation with your virtual agent—anytime, anywhere. ",
+      tags: [
+        {
+          name: "react",
+          color: "blue-text-gradient",
+        },
+        {
+          name: "polar",
+          color: "green-text-gradient",
+        },
+        {
+          name: "neondb",
+          color: "pink-text-gradient",
+        },
+      ],
+      image: logo2,
+      source_code_link: "https://meetai-mu.vercel.app/",
+    },
     {
       name: "SaaS based AI Platform : Infini  ",
       description:

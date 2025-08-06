@@ -51,7 +51,7 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
       >
-        I&apos;m a Cybersecurity student, a passionate programmer and a full stack web developer. I have a strong foundation in programming and problem-solving skills.I know languages like C ,Java and C++. I have also worked on projects using React and node.js. I am always eager to learn new technologies and improve my skills. I am looking for opportunities to work on challenging projects and grow as a developer.
+        I&apos;m a Software and Web Developer with a strong foundation in Java, React, and Next.js. Passionate about building robust applications, I also have a keen interest in securing digital assets and integrating security best practices into the development lifecycle. I aim to create scalable, user-centric solutions while ensuring data integrity and system resilience.I have also worked on projects using React and Next. I am always eager to learn new technologies and improve my skills. I am looking for opportunities to work on challenging projects and grow as a developer.
       </motion.p>
 
       <div className='mt-20 flex flex-wrap gap-10'>
