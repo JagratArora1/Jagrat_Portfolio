@@ -34,3 +34,12 @@ The deployed page therefore contains its full text up front, so search engines a
 - **Profile links**: add new profiles (X, LeetCode…) in two places, `sameAs` in `index.html` and `socialLinks` in `src/constants/index.js` (shown in the footer).
 - **`public/`**: `robots.txt`, `sitemap.xml` (update `<lastmod>` after content changes), `og-image.jpg` (1200×630 link preview), favicons and `site.webmanifest`.
 - **`vercel.json`**: security headers, long-term caching for hashed assets, and a redirect from the `.vercel.app` address to the custom domain.
+
+## Content
+
+Projects, experience, skills and testimonials live in `src/constants/index.js`. Keep the skills list at 12 or fewer: each skill is its own 3D canvas, and browsers cap WebGL contexts per page at about 16.
+
+## Credits
+
+- 3D models: [Gaming Desktop PC](https://sketchfab.com/3d-models/gaming-desktop-pc-d1d8282c9916438091f11aeb28787b66) by Yolala1232 and [Stylized planet](https://sketchfab.com/3d-models/stylized-planet-789725db86f547fc9163b00f302c3e70) by cmzw, both [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Optimised for the web with [glTF Transform](https://gltf-transform.dev/); see the `license.txt` next to each model.
+- PostgreSQL and Redis icons: [Devicon](https://devicon.dev/) (MIT).

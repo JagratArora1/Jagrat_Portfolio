@@ -9,3 +9,4 @@ Model License:
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
 This work is based on "Gaming Desktop PC" (https://sketchfab.com/3d-models/gaming-desktop-pc-d1d8282c9916438091f11aeb28787b66) by Yolala1232 (https://sketchfab.com/Yolala1232) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+Changes for this site (2026-11-22): converted to a single GLB, textures resized to at most 1024 px and converted to WebP, meshes merged and geometry compressed (meshopt). Appearance unchanged.

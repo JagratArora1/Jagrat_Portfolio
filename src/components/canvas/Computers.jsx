@@ -7,7 +7,7 @@ import { LoadingFlag, LoadingOverlay } from '../Loader';
 // import { Mesh } from 'three';
 
 const Computers = ({isMobile}) => {
-  const computer = useGLTF('./desktop_pc/scene.gltf');
+  const computer = useGLTF('/desktop_pc/scene.glb');
   return (
     <mesh>
       <hemisphereLight intensity={1.5} groundColor="black" />

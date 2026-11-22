@@ -8,6 +8,15 @@ import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 import { testimonials } from "../constants";
 
+// "Arko Bagchi" -> "AB", "Miss Abha" -> "A" (titles are skipped).
+const initials = (name) =>
+  name
+    .split(" ")
+    .filter((word) => word && !/^(mr|mrs|ms|miss|dr|prof)\.?$/i.test(word))
+    .map((word) => word[0].toUpperCase())
+    .slice(0, 2)
+    .join("");
+
 const FeedbackCard = ({
   index,
   testimonial,
@@ -36,11 +45,22 @@ const FeedbackCard = ({
           </p>
         </div>
 
-        <img
-          src={image}
-          alt={name}
-          className='w-10 h-10 rounded-full object-cover'
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={name}
+            className='w-10 h-10 rounded-full object-cover'
+          />
+        ) : (
+          // No photo yet: show initials. Add an `image` to the testimonial in
+          // src/constants/index.js to use a real photo instead.
+          <div
+            aria-hidden='true'
+            className='w-10 h-10 shrink-0 rounded-full green-pink-gradient flex items-center justify-center text-white text-[14px] font-semibold'
+          >
+            {initials(name)}
+          </div>
+        )}
       </div>
     </div>
   </motion.div>
