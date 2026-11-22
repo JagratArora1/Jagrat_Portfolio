@@ -20,7 +20,7 @@ const ServiceCard = ({ index, title, icon }) => (
   >
     <motion.div
       variants={fadeIn("right", "spring", index * 0.5, 0.75)}
-      className='w-full  p-px rounded-[20px] shadow-card'
+      className='w-full p-px rounded-[20px] shadow-card hover-glow'
     >
       <div
         
@@ -32,7 +32,7 @@ const ServiceCard = ({ index, title, icon }) => (
           className='w-16 h-16 object-contain'
         />
 
-        <h3 className='text-white text-[20px] font-bold text-center'>
+        <h3 className='text-heading text-[20px] font-bold text-center'>
           {title}
         </h3>
       </div>

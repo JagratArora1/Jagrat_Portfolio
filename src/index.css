@@ -9,6 +9,9 @@
   --color-black-100: #100d25;
   --color-black-200: #090325;
   --color-white-100: #f3f3f3;
+  /* Headings and main text. (Plain `text-white` is kept for text that sits on
+     a coloured or dark background in both themes.) */
+  --color-heading: #ffffff;
 
   --shadow-card: 0px 35px 120px -15px #211e35;
 
@@ -43,7 +46,175 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
     scroll-behavior: smooth;
-    color-scheme: dark;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Light / dark theme (see src/theme.js). The @theme values above are the dark
+   theme; light mode overrides the same variables, so every Tailwind colour
+   utility (bg-primary, text-secondary, text-heading…) switches with it.
+   ------------------------------------------------------------------------ */
+:root {
+  color-scheme: dark;
+  --timeline-card: #1d1836;
+  --timeline-line: #ffffff;
+  --timeline-shadow: 0 3px 0 #dddddd;
+  --glow-color: rgba(145, 94, 255, 0.09);
+  --lamp-cable: #57527a;
+  --lamp-cord: #9a95c2;
+  --lamp-bulb: #3b3756;
+  --lamp-glow: 0;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-primary: #f7f5ff;
+  --color-secondary: #5b5778;
+  --color-tertiary: #ffffff;
+  --color-black-100: #ece7ff;
+  --color-black-200: #ffffff;
+  --color-white-100: #2b2746;
+  --color-heading: #16122f;
+  --shadow-card: 0px 24px 60px -24px rgba(76, 56, 170, 0.35);
+  --background-image-hero-pattern:
+    radial-gradient(55% 45% at 78% 38%, rgba(145, 94, 255, 0.2), transparent 70%),
+    radial-gradient(40% 40% at 12% 18%, rgba(0, 206, 168, 0.14), transparent 70%),
+    linear-gradient(180deg, #efeaff 0%, #f7f5ff 100%);
+
+  --timeline-card: #ffffff;
+  --timeline-line: #d9d1f7;
+  --timeline-shadow: 0 12px 32px -14px rgba(76, 56, 170, 0.35);
+  --glow-color: rgba(145, 94, 255, 0.11);
+  --lamp-cable: #77729a;
+  --lamp-cord: #77729a;
+  --lamp-bulb: #ffe28c;
+  --lamp-glow: 1;
+}
+
+::selection {
+  background: rgba(145, 94, 255, 0.35);
+}
+
+/* White icons (menu, close) need to be dark on the light background. */
+:root[data-theme="light"] .theme-invert {
+  filter: invert(1);
+}
+
+/* The 3D loading spinner is drawn in white. */
+:root[data-theme="light"] .canvas-loader {
+  filter: invert(0.85);
+}
+
+/* Theme switch: the new theme grows out of the lamp as a circle (the animation
+   itself is in src/theme.js). Turn off the default cross-fade. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Experience timeline (react-vertical-timeline-component) */
+.vertical-timeline-element-date {
+  color: var(--color-secondary);
+}
+
+/* ---------------------------------------------------------------------------
+   Lamp toggle (src/components/LampToggle.jsx)
+   ------------------------------------------------------------------------ */
+.lamp-bulb {
+  fill: var(--lamp-bulb);
+  transition: fill 0.4s ease, filter 0.4s ease;
+}
+:root[data-theme="light"] .lamp-bulb {
+  filter: drop-shadow(0 0 6px #ffd34d);
+}
+.lamp-glow {
+  opacity: var(--lamp-glow);
+  transition: opacity 0.5s ease;
+}
+.lamp-cord-line {
+  background: var(--lamp-cord);
+}
+
+/* ---------------------------------------------------------------------------
+   Page effects (src/components/Effects.jsx)
+   ------------------------------------------------------------------------ */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 50;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #00cea8, #915eff, #bf61ff);
+  pointer-events: none;
+}
+
+/* Soft spotlight that follows the mouse, behind the page content. */
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    560px circle at var(--x, 50%) var(--y, 50%),
+    var(--glow-color),
+    transparent 45%
+  );
+}
+
+/* Name in the hero: a slow-moving gradient. */
+.text-shimmer {
+  background: linear-gradient(90deg, #915eff, #00cea8, #bf61ff, #915eff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-shimmer 8s linear infinite;
+}
+@keyframes text-shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Cards light up on hover. */
+.hover-glow {
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.hover-glow:hover {
+  box-shadow:
+    0 0 0 1px rgba(145, 94, 255, 0.45),
+    0 24px 60px -20px rgba(145, 94, 255, 0.55);
+}
+
+/* Hero entrance. Plain CSS so it runs before JavaScript loads and the
+   prerendered text is never hidden waiting for it. */
+.hero-rise {
+  animation: hero-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
+}
+.hero-line {
+  transform-origin: top;
+  animation: hero-line 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+@keyframes hero-line {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-shimmer,
+  .hero-rise,
+  .hero-line {
+    animation: none;
   }
 }
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +10,11 @@
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://www.jagratarora.com/" />
     <meta name="theme-color" content="#050816" />
+    <!-- Applies the visitor's saved light/dark choice before the first paint
+         (src/theme.js). The Content-Security-Policy in vercel.json allows this
+         exact script by its hash, and the blog pages use the same one, so if you
+         edit it, update the hash too (the build checks it and tells you). -->
+    <script>try{if(localStorage.getItem("theme")==="light"){var d=document.documentElement,m=document.querySelector('meta[name="theme-color"]');d.dataset.theme="light";if(m)m.setAttribute("content","#f7f5ff")}}catch(e){}</script>
 
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
