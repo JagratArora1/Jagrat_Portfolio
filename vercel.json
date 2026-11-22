@@ -5,9 +5,9 @@
   "outputDirectory": "dist",
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "jagrat-portfolio-psi.vercel.app" }],
-      "destination": "https://www.jagratarora.com/:path*",
+      "destination": "https://www.jagratarora.com/:path",
       "permanent": true
     }
   ],
