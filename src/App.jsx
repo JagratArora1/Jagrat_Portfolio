@@ -1,12 +1,12 @@
-import { BrowserRouter } from "react-router-dom"
-import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas } from './components' ;
+import { About, Contact, Experience, Feedbacks, Footer, Hero, Navbar, Tech, Works, StarsCanvas } from './components' ;
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <div className="relative z-0 bg-primary">
+    <div className="relative z-0 bg-primary">
+      {/* Navbar is position:fixed, so it sits outside the hero wrapper without moving. */}
+      <Navbar />
+      <main>
         <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
           <Hero />
         </div>
         <About />
@@ -16,10 +16,11 @@ const App = () => {
         <Feedbacks />
         <div className="relative z-0">
           <Contact />
+          <Footer />
           <StarsCanvas />
         </div>
-      </div>
-    </BrowserRouter>
+      </main>
+    </div>
   )
 }
 

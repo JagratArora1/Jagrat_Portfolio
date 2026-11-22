@@ -236,9 +236,22 @@ import {
         },
       ],
       image: logo,
-      source_code_link: "https://jagrat-portfolio-psi.vercel.app/",
+      source_code_link: "https://github.com/JagratArora1/Jagrat_Portfolio",
     },
   ];
   
-  export { services, technologies, experiences, testimonials, projects };
+  // Your public profiles. Shown in the footer; keep in sync with "sameAs" in
+  // index.html so search engines link these accounts to this site.
+  const socialLinks = [
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/jagrat-arora-0b923024b/",
+    },
+    {
+      name: "GitHub",
+      url: "https://github.com/JagratArora1",
+    },
+  ];
+
+  export { services, technologies, experiences, testimonials, projects, socialLinks };
 

@@ -1,0 +1,13 @@
+{
+  "name": "Jagrat Arora",
+  "short_name": "Jagrat Arora",
+  "description": "Portfolio of Jagrat Arora, software developer and cybersecurity enthusiast.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#050816",
+  "theme_color": "#050816",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

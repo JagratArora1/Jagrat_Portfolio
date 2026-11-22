@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 // import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
@@ -38,7 +38,7 @@ const FeedbackCard = ({
 
         <img
           src={image}
-          alt={`feedback_by-${name}`}
+          alt={name}
           className='w-10 h-10 rounded-full object-cover'
         />
       </div>

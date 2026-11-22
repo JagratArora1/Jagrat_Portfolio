@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unknown-property */
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   Decal,
@@ -10,7 +10,7 @@ import {
   useTexture,
 } from "@react-three/drei";
 
-import CanvasLoader from "../Loader";
+import { LoadingFlag, LoadingOverlay } from "../Loader";
 
 
 const Ball = (props) => {
@@ -40,17 +40,21 @@ const Ball = (props) => {
 }
 
 const BallCanvas = ({ icon }) => {
+  const [loading, setLoading] = useState(false);
   return (
-    <Canvas
-      frameloop="demand"
-      gl={{ preserveDrawingBuffer: true }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls enableZoom={false} />
-        <Ball imgUrl={icon} />
-      </Suspense>
-      <Preload all />
-    </Canvas>
+    <div className="relative w-full h-full">
+      <Canvas
+        frameloop="demand"
+        gl={{ preserveDrawingBuffer: true }}
+      >
+        <Suspense fallback={<LoadingFlag onChange={setLoading} />}>
+          <OrbitControls enableZoom={false} />
+          <Ball imgUrl={icon} />
+        </Suspense>
+        <Preload all />
+      </Canvas>
+      {loading && <LoadingOverlay />}
+    </div>
   );
 };
 

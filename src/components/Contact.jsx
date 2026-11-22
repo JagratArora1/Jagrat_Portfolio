@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
@@ -48,7 +48,13 @@ const Contact = () => {
           to_email: "jagratarora293@gmail.com",
           message: form.message,
         },
-        '965FyAhrJ1Hu5T3Zg'
+        {
+          publicKey: '965FyAhrJ1Hu5T3Zg',
+          // Client-side spam friction. The real protection is the EmailJS
+          // dashboard config (fixed recipient, domain allowlist, rate limit).
+          blockHeadless: true,
+          limitRate: { id: 'contact-form', throttle: 10000 },
+        }
       )
       .then(
         () => {
@@ -79,7 +85,7 @@ const Contact = () => {
         className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
       >
         <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadText}>Contact.</h3>
+        <h2 className={styles.sectionHeadText}>Contact.</h2>
 
         <form
           ref={formRef}
@@ -93,8 +99,10 @@ const Contact = () => {
               name='name'
               value={form.name}
               onChange={handleChange}
+              required
+              maxLength={100}
               placeholder="What's your good name?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-hidden border-none font-medium'
             />
           </label>
           <label className='flex flex-col'>
@@ -104,8 +112,10 @@ const Contact = () => {
               name='email'
               value={form.email}
               onChange={handleChange}
+              required
+              maxLength={254}
               placeholder="What's your web address?"
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-hidden border-none font-medium'
             />
           </label>
           <label className='flex flex-col'>
@@ -115,14 +125,16 @@ const Contact = () => {
               name='message'
               value={form.message}
               onChange={handleChange}
+              required
+              maxLength={5000}
               placeholder='What you want to say?'
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-hidden border-none font-medium'
             />
           </label>
 
           <button
             type='submit'
-            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
+            className='bg-tertiary py-3 px-8 rounded-xl outline-hidden w-fit text-white font-bold shadow-md shadow-primary'
           >
             {loading ? "Sending..." : "Send"}
           </button>

@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState} from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Preload, useGLTF } from '@react-three/drei';
-import CanvasLoader from '../Loader';
+import { LoadingFlag, LoadingOverlay } from '../Loader';
 // import { Mesh } from 'three';
 
 const Computers = ({isMobile}) => {
@@ -31,10 +31,12 @@ const Computers = ({isMobile}) => {
 }
 
 const ComputersCanvas = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    // `window` doesn't exist while the page is prerendered at build time.
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 500px)').matches
+  );
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 500px)');
-    setIsMobile(mediaQuery.matches);
     const handleMediaQueryChange = (event) => {
       setIsMobile(event.matches);
     }
@@ -43,23 +45,27 @@ const ComputersCanvas = () => {
       mediaQuery.removeEventListener('change',handleMediaQueryChange);
     }
   },[])
+  const [loading, setLoading] = useState(false);
   return(
-    <Canvas
-      frameloop="demand"
-      shadows
-      camera={{position: [20,3,5],fov:25}}
-      gl={{preserveDrawingBuffer: true}}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls 
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-        />
-        <Computers isMobile={isMobile}/>
-      </Suspense>
-      <Preload all />
-    </Canvas>
+    <div className="relative w-full h-full">
+      <Canvas
+        frameloop="demand"
+        shadows="percentage"
+        camera={{position: [20,3,5],fov:25}}
+        gl={{preserveDrawingBuffer: true}}
+      >
+        <Suspense fallback={<LoadingFlag onChange={setLoading} />}>
+          <OrbitControls
+            enableZoom={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          />
+          <Computers isMobile={isMobile}/>
+        </Suspense>
+        <Preload all />
+      </Canvas>
+      {loading && <LoadingOverlay />}
+    </div>
   )
 }
 
