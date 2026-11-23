@@ -25,7 +25,7 @@ import postgresql from "./tech/postgresql.png";
 import redis from "./tech/redis.png";
 
 import quikkred from "./company/quikkred.png";
-import fidelity from "./company/fidelity.png";
+import fidelity from "./company/fidelity.svg";
 
 import finvox from "./projects/finvox.webp";
 import vikam from "./projects/vikam.webp";

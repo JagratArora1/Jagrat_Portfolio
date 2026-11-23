@@ -139,7 +139,7 @@ import {
       title: "Software Developer",
       company_name: "Fidelity International Limited",
       icon: fidelity,
-      iconBg: "#383E56",
+      iconBg: "#b72e2a", // Fidelity red, so the square logo fills the circle
       date: "Jan 2025 – Jul 2025",
       points: [
         "Underwent intensive training in Java and applied acquired skills by building a complete project, demonstrating proficiency in object-oriented programming, backend logic, and application structure.",
