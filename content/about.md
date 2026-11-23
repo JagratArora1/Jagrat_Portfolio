@@ -47,7 +47,7 @@ Personal projects:
 
 - **MeetAI:** users create their own AI agent and hold video meetings with it, built with Next.js. [Live site](https://meetai-mu.vercel.app/) · [Source code](https://github.com/JagratArora1/meetai)
 - **Portfolio website:** this site, built with React 19 and three.js, with a blog and light and dark mode. [Source code](https://github.com/JagratArora1/Jagrat_Portfolio)
-- **Infini:** a SaaS AI platform for answering questions and generating images, videos and music from prompts.
+- **Infini:** a SaaS AI platform for answering questions and generating images, videos and music from prompts. [Live site](https://ai-saas-platform-liard.vercel.app/)
 
 ## Writing
 

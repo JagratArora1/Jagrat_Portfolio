@@ -301,6 +301,7 @@ import {
         { name: "prisma", color: "pink-text-gradient" },
       ],
       image: logo1,
+      live_link: "https://ai-saas-platform-liard.vercel.app/",
     },
   ];
 
