@@ -38,6 +38,17 @@
     {
       "source": "/(desktop_pc|planet)/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+    },
+    {
+      "source": "/(llms|llms-full).txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    },
+    {
+      "source": "/blog/:slug.md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "X-Robots-Tag", "value": "noindex" }
+      ]
     }
   ]
 }

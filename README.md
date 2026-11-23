@@ -20,11 +20,12 @@ Requires Node.js 20.19+ or 22.12+.
 
 ## How the build works
 
-`npm run build` does three steps:
+`npm run build` does four steps:
 
 1. `vite build` builds the site into `dist/`.
 2. `vite build --ssr src/entry-server.jsx` builds a Node version of the app into `dist-server/`.
 3. `scripts/prerender.js` renders the app to HTML and writes it into `dist/index.html`, then removes `dist-server/`.
+4. `scripts/build-pages.js` builds the static pages from `content/`: the blog, the About page, `llms.txt` and `llms-full.txt` (see below).
 
 The deployed page therefore contains its full text up front, so search engines and link previews see it without running JavaScript. In the browser, `src/main.jsx` hydrates that HTML. The 3D scenes are loaded separately (`src/components/canvas/index.jsx`), and the ones below the fold are only created when scrolled near.
 
@@ -34,6 +35,15 @@ The deployed page therefore contains its full text up front, so search engines a
 - **Profile links**: add new profiles (X, LeetCode…) in two places, `sameAs` in `index.html` and `socialLinks` in `src/constants/index.js` (shown in the footer).
 - **`public/`**: `robots.txt`, `sitemap.xml` (update `<lastmod>` after content changes), `og-image.jpg` (1200×630 link preview), favicons and `site.webmanifest`.
 - **`vercel.json`**: security headers, long-term caching for hashed assets, and a redirect from the `.vercel.app` address to the custom domain.
+
+## AI assistants (ChatGPT, Claude, Gemini, Perplexity…)
+
+AI assistants answer questions about a person from their web search results (ChatGPT and Copilot use Bing, Gemini uses Google, Claude and Perplexity use their own search) and, much later, from what their models learned in training. So the aim is to be easy to find, crawl and quote:
+
+- **`content/about.md` → `/about`**: a factual, third-person profile with quick facts and answers to common questions ("Who is Jagrat Arora?"), plus `AboutPage`, `Person` and `FAQPage` structured data. Keep it in step with the portfolio, LinkedIn and GitHub: assistants trust facts that agree across sources.
+- **`/llms.txt` and `/llms-full.txt`** ([llmstxt.org](https://llmstxt.org/)): a plain-text summary of the site with links, and the profile plus every post in one file. Each post is also published as Markdown at `/blog/<slug>.md` (not indexed by search engines, as it duplicates the page).
+- **`public/robots.txt`** allows all crawlers and names the AI ones explicitly. All pages are plain HTML, so crawlers that don't run JavaScript (most AI crawlers) still read everything.
+- **IndexNow**: after deploying new or changed pages, run `node scripts/indexnow.js` to notify Bing and the other IndexNow engines straight away. The key file is `public/5e3335672aeebf83e083157a2bdba79a.txt`.
 
 ## Content
 
@@ -52,7 +62,7 @@ topic: Encryption
 ---
 ```
 
-`scripts/build-blog.js` (the last build step) turns them into plain HTML pages with the site's look, adds them to the blog index and `sitemap.xml`, and adds structured data for search engines. `vercel.json` sets `cleanUrls` so the pages are served without `.html`.
+`scripts/build-pages.js` (the last build step) turns them into plain HTML pages with the site's look, adds them to the blog index and `sitemap.xml`, and adds structured data for search engines. `vercel.json` sets `cleanUrls` so the pages are served without `.html`.
 
 ## Light and dark mode
 

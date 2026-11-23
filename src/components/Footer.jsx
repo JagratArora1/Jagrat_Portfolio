@@ -28,7 +28,18 @@ const Footer = () => {
           © <span suppressHydrationWarning>{year}</span>{" "}
           Jagrat Arora
         </p>
-        <ul className='flex gap-6'>
+        <ul className='flex flex-wrap justify-center gap-6'>
+          {/* The static pages built by scripts/build-pages.js */}
+          <li>
+            <a href='/about' className='hover:text-heading transition-colors'>
+              About Jagrat
+            </a>
+          </li>
+          <li>
+            <a href='/blog' className='hover:text-heading transition-colors'>
+              Blog
+            </a>
+          </li>
           {socialLinks.map((link) => (
             <li key={link.name}>
               <a

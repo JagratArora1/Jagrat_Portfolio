@@ -35,7 +35,7 @@ import {
       title: "Work",
     },
     {
-      // A separate page (built by scripts/build-blog.js), not a section.
+      // A separate page (built by scripts/build-pages.js), not a section.
       id: "blog",
       title: "Blog",
       href: "/blog",

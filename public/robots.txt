@@ -1,4 +1,23 @@
+# Search engines and AI assistants are welcome to read and cite this site.
 User-agent: *
+Allow: /
+
+# AI crawlers, listed by name so the intent is clear: OpenAI (ChatGPT),
+# Anthropic (Claude), Google (Gemini), Perplexity, Apple, Meta and Common Crawl
+# (whose archive many AI models learn from). Bing and Google search, which
+# ChatGPT, Copilot and Gemini use for live answers, are covered by "*" above.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Google-Extended
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://www.jagratarora.com/sitemap.xml

@@ -1,12 +1,17 @@
 // Runs last in `npm run build` (see package.json).
 //
-// Turns the Markdown posts in content/blog/ into static pages:
+// Builds the static pages around the portfolio from content/:
 //   dist/blog.html           -> https://www.jagratarora.com/blog
 //   dist/blog/<slug>.html    -> https://www.jagratarora.com/blog/<slug>
-// ("cleanUrls" in vercel.json serves them without the .html.) The pages are
-// plain HTML and CSS with one small script for the light/dark lamp, so they
-// load instantly and search engines read them directly. It also adds the pages
-// to dist/sitemap.xml.
+//   dist/blog/<slug>.md      -> the post as Markdown, for AI tools
+//   dist/about.html          -> https://www.jagratarora.com/about (content/about.md)
+//   dist/llms.txt            -> short summary of the site for AI assistants
+//   dist/llms-full.txt       -> the profile and every post in one text file
+// ("cleanUrls" in vercel.json serves the pages without the .html.) The pages
+// are plain HTML and CSS with one small script for the light/dark lamp, so
+// they load instantly, and search engines and AI crawlers (which mostly don't
+// run JavaScript) read them directly. It also adds the pages to
+// dist/sitemap.xml.
 //
 // Post format: front matter with title, description (one sentence, about 150
 // characters), date (YYYY-MM-DD) and topic, then Markdown using ## headings.
@@ -46,12 +51,12 @@ const formatDate = (iso) =>
 // script and the policy have drifted apart.
 const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8')
 const themeScript = indexHtml.match(/<script>(try\{[\s\S]*?)<\/script>/)?.[1]
-if (!themeScript) throw new Error('build-blog: theme script not found in index.html')
+if (!themeScript) throw new Error('build-pages: theme script not found in index.html')
 const themeHash = `sha256-${crypto.createHash('sha256').update(themeScript).digest('base64')}`
 const vercelConfig = fs.readFileSync(path.join(root, 'vercel.json'), 'utf8')
 if (!vercelConfig.includes(`'${themeHash}'`)) {
   throw new Error(
-    `build-blog: the theme script in index.html changed. Put '${themeHash}' in script-src in vercel.json.`,
+    `build-pages: the theme script in index.html changed. Put '${themeHash}' in script-src in vercel.json.`,
   )
 }
 
@@ -59,16 +64,16 @@ if (!vercelConfig.includes(`'${themeHash}'`)) {
 function readPost(file) {
   const raw = fs.readFileSync(path.join(postsDir, file), 'utf8').replace(/\r\n/g, '\n')
   const match = raw.match(/^---\n([\s\S]*?)\n---\n/)
-  if (!match) throw new Error(`build-blog: ${file} has no front matter`)
+  if (!match) throw new Error(`build-pages: ${file} has no front matter`)
   const meta = {}
   for (const line of match[1].split('\n')) {
     const colon = line.indexOf(':')
     if (colon > 0) meta[line.slice(0, colon).trim()] = line.slice(colon + 1).trim()
   }
   for (const key of ['title', 'description', 'date', 'topic']) {
-    if (!meta[key]) throw new Error(`build-blog: ${file} is missing "${key}"`)
+    if (!meta[key]) throw new Error(`build-pages: ${file} is missing "${key}"`)
   }
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(meta.date)) throw new Error(`build-blog: bad date in ${file}`)
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(meta.date)) throw new Error(`build-pages: bad date in ${file}`)
   const markdown = raw.slice(match[0].length)
   const words = markdown.split(/\s+/).filter(Boolean).length
   const slug = file.replace(/\.md$/, '')
@@ -76,6 +81,7 @@ function readPost(file) {
     ...meta,
     slug,
     url: `${SITE}/blog/${slug}`,
+    markdown,
     html: marked.parse(markdown),
     minutes: Math.max(1, Math.round(words / 220)),
   }
@@ -110,6 +116,10 @@ main{padding:56px 0 72px}
 h1{color:var(--heading);font-size:clamp(30px,5.2vw,46px);line-height:1.18;margin:14px 0 18px;font-weight:800;letter-spacing:-.01em}
 .chip{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:999px;background:linear-gradient(90deg,rgba(0,206,168,.16),rgba(191,97,255,.18));color:var(--heading)}
 .lead{color:var(--muted);font-size:18px;margin:0}
+.profile-head{display:flex;align-items:center;gap:24px;margin:0 0 36px}
+.profile-head img{width:128px;height:128px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0;box-shadow:0 0 0 3px var(--bg),0 0 0 5px #915eff}
+.profile-head h1{margin:6px 0 8px}
+@media (max-width:560px){.profile-head{flex-direction:column;align-items:flex-start}}
 .byline{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px;margin:0 0 40px}
 .byline img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:top}
 .byline a{color:var(--heading);font-weight:600;text-decoration:none}
@@ -219,7 +229,7 @@ ${head}
 ${body}
 <footer class="site-footer"><div class="wrap">
 <span>© ${new Date().getFullYear()} Jagrat Arora</span>
-<nav aria-label="Profiles"><a href="/">Portfolio</a><a href="https://www.linkedin.com/in/jagrat-arora-0b923024b/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/JagratArora1" rel="me noopener" target="_blank">GitHub</a></nav>
+<nav aria-label="Profiles"><a href="/">Portfolio</a><a href="/about">About Jagrat</a><a href="https://www.linkedin.com/in/jagrat-arora-0b923024b/" rel="me noopener" target="_blank">LinkedIn</a><a href="https://github.com/JagratArora1" rel="me noopener" target="_blank">GitHub</a></nav>
 </div></footer>
 <script src="/blog/theme.js" defer></script>
 </body>
@@ -236,7 +246,7 @@ const postCard = (post, headingLevel = 'h3') => `<li><a class="card" href="/blog
 
 const AUTHOR = `<aside class="author">
 <img src="/jagrat-arora.jpg" alt="Jagrat Arora" width="84" height="84" loading="lazy">
-<p><strong>Jagrat Arora</strong> is a full-stack software developer at Quikkred in Faridabad, India, building secure fintech products for web and mobile. He writes about end-to-end encryption, security and AI. <a href="/">More about Jagrat</a></p>
+<p><strong>Jagrat Arora</strong> is a full-stack software developer at Quikkred in Faridabad, India, building secure fintech products for web and mobile. Jagrat writes about end-to-end encryption, security and AI. <a href="/about">More about Jagrat</a></p>
 </aside>`
 
 // --- Write the pages ----------------------------------------------------------
@@ -336,14 +346,151 @@ fs.writeFileSync(
   }),
 )
 
+// --- About page ---------------------------------------------------------------
+// A plain, factual profile written in the third person, so search engines and
+// AI assistants can quote it directly when someone asks about Jagrat Arora.
+const aboutRaw = fs.readFileSync(path.join(root, 'content', 'about.md'), 'utf8').replace(/\r\n/g, '\n')
+const aboutMatch = aboutRaw.match(/^---\n([\s\S]*?)\n---\n/)
+if (!aboutMatch) throw new Error('build-pages: content/about.md has no front matter')
+const about = {}
+for (const line of aboutMatch[1].split('\n')) {
+  const colon = line.indexOf(':')
+  if (colon > 0) about[line.slice(0, colon).trim()] = line.slice(colon + 1).trim()
+}
+for (const key of ['title', 'description', 'updated']) {
+  if (!about[key]) throw new Error(`build-pages: content/about.md is missing "${key}"`)
+}
+const postList = posts.map((post) => `- [${post.title}](${post.url}): ${post.description}`).join('\n')
+const aboutMarkdown = aboutRaw.slice(aboutMatch[0].length).replace('{{posts}}', postList)
+const aboutIntro = aboutMarkdown.split('\n\n')[0]
+const section = (heading) =>
+  aboutMarkdown.match(new RegExp(`## ${heading}\\n\\n([\\s\\S]*?)(?=\\n## |$)`))?.[1].trim() ?? ''
+const plainText = (markdown) => markdown.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*/g, '')
+const faqs = [...section('Frequently asked questions').matchAll(/### (.+)\n\n([\s\S]*?)(?=\n### |$)/g)].map(
+  ([, question, answer]) => ({ question: question.trim(), answer: plainText(answer.trim()) }),
+)
+if (faqs.length === 0) throw new Error('build-pages: no FAQs found in content/about.md')
+
+fs.writeFileSync(
+  path.join(dist, 'about.html'),
+  page({
+    title: about.title,
+    description: about.description,
+    canonical: `${SITE}/about`,
+    ogType: 'profile',
+    current: '/about',
+    head: jsonLd({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'AboutPage',
+          '@id': `${SITE}/about#page`,
+          url: `${SITE}/about`,
+          name: about.title,
+          description: about.description,
+          inLanguage: 'en',
+          dateModified: about.updated,
+          isPartOf: { '@id': `${SITE}/#website` },
+          mainEntity: { '@id': PERSON_ID },
+        },
+        {
+          '@type': 'Person',
+          '@id': PERSON_ID,
+          name: 'Jagrat Arora',
+          url: `${SITE}/`,
+          image: `${SITE}/jagrat-arora.jpg`,
+          jobTitle: 'Software Developer',
+          description: plainText(aboutIntro),
+          worksFor: { '@type': 'Organization', name: 'Quikkred', url: 'https://www.quikkred.in/' },
+          homeLocation: { '@type': 'Place', name: 'Faridabad, Haryana, India' },
+          sameAs: ['https://www.linkedin.com/in/jagrat-arora-0b923024b/', 'https://github.com/JagratArora1'],
+        },
+        {
+          '@type': 'FAQPage',
+          '@id': `${SITE}/about#faq`,
+          mainEntity: faqs.map(({ question, answer }) => ({
+            '@type': 'Question',
+            name: question,
+            acceptedAnswer: { '@type': 'Answer', text: answer },
+          })),
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+            { '@type': 'ListItem', position: 2, name: 'About', item: `${SITE}/about` },
+          ],
+        },
+      ],
+    }),
+    body: `<main class="wrap rise">
+<div class="profile-head">
+<img src="/jagrat-arora.jpg" alt="Jagrat Arora" width="128" height="128">
+<div><span class="chip">About</span><h1>Jagrat Arora</h1><p class="lead">Full-stack software developer at Quikkred · Faridabad, India</p></div>
+</div>
+<article>
+${marked.parse(aboutMarkdown)}
+</article>
+</main>`,
+  }),
+)
+
+// --- Files for AI assistants (https://llmstxt.org/) --------------------------
+// Markdown copies of the posts, a short llms.txt that points to everything,
+// and llms-full.txt with the full text in one file.
+for (const post of posts) {
+  fs.writeFileSync(
+    path.join(dist, 'blog', `${post.slug}.md`),
+    `# ${post.title}\n\n> ${post.description}\n\nBy Jagrat Arora · ${formatDate(post.date)} · ${post.url}\n\n${post.markdown.trim()}\n`,
+  )
+}
+
+fs.writeFileSync(
+  path.join(dist, 'llms.txt'),
+  `# Jagrat Arora
+
+> ${plainText(aboutIntro)}
+
+${section('Quick facts')}
+
+## Pages
+
+- [Portfolio](${SITE}/): projects, work experience, skills and a contact form
+- [About Jagrat Arora](${SITE}/about): full profile, work history, projects and frequently asked questions
+- [Blog](${SITE}/blog): articles on end-to-end encryption and AI
+
+## Articles
+
+${posts.map((post) => `- [${post.title}](${post.url}.md): ${post.description}`).join('\n')}
+
+## Optional
+
+- [Full text of the profile and all articles](${SITE}/llms-full.txt)
+`,
+)
+
+fs.writeFileSync(
+  path.join(dist, 'llms-full.txt'),
+  [
+    `# Jagrat Arora\n\nSource: ${SITE}/about\n\n${aboutMarkdown.trim()}`,
+    ...posts.map(
+      (post) =>
+        `# ${post.title}\n\nBy Jagrat Arora · ${formatDate(post.date)} · ${post.url}\n\n${post.markdown.trim()}`,
+    ),
+  ].join('\n\n---\n\n') + '\n',
+)
+
 // --- Sitemap ------------------------------------------------------------------
 const sitemapFile = path.join(dist, 'sitemap.xml')
 const sitemap = fs.readFileSync(sitemapFile, 'utf8')
 const newest = posts.reduce((latest, post) => ((post.updated || post.date) > latest ? post.updated || post.date : latest), '')
 const entries = [
+  `  <url>\n    <loc>${SITE}/about</loc>\n    <lastmod>${about.updated}</lastmod>\n  </url>`,
   `  <url>\n    <loc>${SITE}/blog</loc>\n    <lastmod>${newest}</lastmod>\n  </url>`,
   ...posts.map((post) => `  <url>\n    <loc>${post.url}</loc>\n    <lastmod>${post.updated || post.date}</lastmod>\n  </url>`),
 ].join('\n')
 fs.writeFileSync(sitemapFile, sitemap.replace('</urlset>', `${entries}\n</urlset>`))
 
-console.log(`build-blog: wrote ${posts.length} posts, the blog index and ${posts.length + 1} sitemap entries`)
+console.log(
+  `build-pages: wrote ${posts.length} posts, the blog index, the about page (${faqs.length} FAQs), llms.txt, llms-full.txt and ${posts.length + 2} sitemap entries`,
+)
