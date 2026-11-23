@@ -55,7 +55,7 @@ const About = () => {
             variants={fadeIn("", "", 0.1, 1)}
             className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
           >
-            I&apos;m Jagrat Arora, a full-stack software developer based in Faridabad, India, working at Quikkred, a digital lending platform. I build products end to end in TypeScript: React and Next.js web apps, React Native mobile apps, and Node.js (Fastify) services on PostgreSQL, MongoDB and Redis. Security has interested me since my first cybersecurity internships, and I bring it into everyday engineering, from end-to-end encryption and tenant isolation to hardened sign-in and role-based permissions. Before Quikkred I trained as a Java developer at Fidelity International. I like owning a feature from design to deployment, and I&apos;m always learning.
+            I&apos;m Jagrat Arora, a full-stack software developer based in Faridabad, India. At Quikkred, a digital lending platform, I lead development of the website, loan management CRM and backend, the Quikkred Connect partner app, VIKAM and Finvox, and I oversee the entire loan disbursement process. I build products end to end in TypeScript: React and Next.js web apps, React Native mobile apps, and Node.js (Fastify) services on PostgreSQL, MongoDB and Redis. Security has interested me since my first cybersecurity internships, and I bring it into everyday engineering, from end-to-end encryption and tenant isolation to hardened sign-in and role-based permissions. Before Quikkred I trained as a Java developer at Fidelity International. I like owning a feature from design to deployment, and I&apos;m always learning.
           </motion.p>
         </div>
 

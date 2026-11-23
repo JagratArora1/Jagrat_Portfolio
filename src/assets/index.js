@@ -29,6 +29,9 @@ import fidelity from "./company/fidelity.svg";
 
 import finvox from "./projects/finvox.webp";
 import vikam from "./projects/vikam.webp";
+import quikkredCrm from "./projects/quikkred-crm.webp";
+import quikkredConnect from "./projects/quikkred-connect.webp";
+import portfolio from "./projects/portfolio.webp";
 
 // import meta from "./company/meta.png";
 // import shopify from "./company/shopify.png";
@@ -84,4 +87,7 @@ export {
   fidelity,
   finvox,
   vikam,
+  quikkredCrm,
+  quikkredConnect,
+  portfolio,
 };

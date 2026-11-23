@@ -22,6 +22,10 @@ import {
     fidelity,
     finvox,
     vikam,
+    quikkredCrm,
+    quikkredConnect,
+    portfolio,
+    logo1,
     logo2,
   } from "../assets";
 
@@ -127,12 +131,13 @@ import {
       icon: quikkred,
       iconBg: "#ffffff",
       date: "Jan 2026 – Present",
+      // In order of priority.
       points: [
-        "Main developer of Finvox, the company's end-to-end encrypted team chat for web and mobile: MLS group encryption, HPKE device linking, encrypted attachments, read receipts, tenant isolation with PostgreSQL row-level security, and LiveKit voice and video calls.",
-        "Built most of Quikkred Connect, a React Native (Expo) app for retail lending partners, with PhonePe and PayU payments over UPI, biometric app lock, push notifications and live support chat.",
-        "Own disbursal, bank payment files and credit-bureau reporting in FluxusForge, the company's multi-tenant lending platform (TypeScript, Fastify, Kysely, React).",
-        "Shipped features across the loan management CRM (React 19, TypeScript): PhonePe e-mandates, credit-bureau report files, bank disbursement exports, permission controls and OCR receipt capture.",
-        "Upgraded the VIKAM money app to Expo SDK 54 with 10-language support and hardened its OTP sign-in; led the frontend of the internal HR portal.",
+        "Lead all of Quikkred's product development, from the website, loan management CRM and backend to Quikkred Connect, VIKAM and Finvox, and oversee the company's entire loan disbursement process.",
+        "Website, CRM and backend: lead the quikkred.in website, the loan management CRM (React 19, TypeScript) and the multi-tenant lending backend (Fastify, Kysely), covering disbursal, bank payment files, PhonePe e-mandates, credit-bureau reporting, permission controls and OCR receipt capture.",
+        "Quikkred Connect: lead the React Native (Expo) app for retail lending partners and built most of it, including PhonePe and PayU payments over UPI, biometric app lock, push notifications and live support chat.",
+        "VIKAM: lead the money and rewards app for India; upgraded it to Expo SDK 54 with support for 10 languages and hardened its OTP sign-in.",
+        "Finvox: lead the end-to-end encrypted team chat for web and mobile, with MLS group encryption, HPKE device linking, encrypted attachments, tenant isolation using PostgreSQL row-level security, and LiveKit voice and video calls.",
       ],
     },
     {
@@ -200,74 +205,102 @@ import {
     },
   ];
 
-  // `label` is shown on the image. `live_link` and `source_code_link` are both
-  // optional; work projects have private code, so they have no source link.
+  // Shown in two groups on the Projects section (`type`: "work" or "personal"),
+  // in this order. `label` is shown on the image. `live_link` and
+  // `source_code_link` are optional; work projects have private code.
   const projects = [
     {
-      name: "Finvox: Encrypted Team Chat",
-      label: "Work project",
+      type: "work",
+      name: "Quikkred CRM & Lending Platform",
+      label: "Lead developer",
       description:
-        "A security-first team chat for web and mobile that I built as the main developer at Quikkred. Messages and files are end-to-end encrypted (MLS, HPKE), each tenant's data is isolated with PostgreSQL row-level security, and voice and video calls run on LiveKit.",
+        "I lead Quikkred's loan management CRM, its multi-tenant lending backend and the quikkred.in website, and oversee the entire loan disbursement process: disbursal, bank payment files, PhonePe e-mandates and credit-bureau reporting.",
       tags: [
-        {
-          name: "typescript",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "e2ee",
-          color: "green-text-gradient",
-        },
-        {
-          name: "react-native",
-          color: "pink-text-gradient",
-        },
+        { name: "react", color: "blue-text-gradient" },
+        { name: "fastify", color: "green-text-gradient" },
+        { name: "typescript", color: "pink-text-gradient" },
       ],
-      image: finvox,
+      image: quikkredCrm,
+      live_link: "https://www.quikkred.in/",
     },
     {
+      type: "work",
       name: "VIKAM: Money App for Bharat",
-      label: "Work project",
+      label: "Lead developer",
       description:
-        "A money and rewards app for India in 10+ languages, built by a small team at Quikkred. I upgraded the Expo mobile app to SDK 54, added the 10-language support, hardened OTP sign-in, and built parts of the rewards wallet and the admin exports.",
+        "I lead VIKAM, a money and rewards app for India in 10+ languages. I upgraded the Expo mobile app to SDK 54, added the 10-language support, hardened OTP sign-in, and built parts of the rewards wallet and the admin exports.",
       tags: [
-        {
-          name: "expo",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "next.js",
-          color: "green-text-gradient",
-        },
-        {
-          name: "fastify",
-          color: "pink-text-gradient",
-        },
+        { name: "expo", color: "blue-text-gradient" },
+        { name: "next.js", color: "green-text-gradient" },
+        { name: "fastify", color: "pink-text-gradient" },
       ],
       image: vikam,
       live_link: "https://vikam.io/",
     },
     {
+      type: "work",
+      name: "Quikkred Connect",
+      label: "Lead developer",
+      description:
+        "I lead and built most of Quikkred Connect, the React Native app for Quikkred's retail lending partners, with PhonePe and PayU payments over UPI, biometric app lock, push notifications and live support chat.",
+      tags: [
+        { name: "react-native", color: "blue-text-gradient" },
+        { name: "expo", color: "green-text-gradient" },
+        { name: "upi", color: "pink-text-gradient" },
+      ],
+      image: quikkredConnect,
+    },
+    {
+      type: "work",
+      name: "Finvox: Encrypted Team Chat",
+      label: "Lead developer",
+      description:
+        "I lead Finvox, a security-first team chat for web and mobile. Messages and files are end-to-end encrypted (MLS, HPKE), each tenant's data is isolated with PostgreSQL row-level security, and voice and video calls run on LiveKit.",
+      tags: [
+        { name: "typescript", color: "blue-text-gradient" },
+        { name: "e2ee", color: "green-text-gradient" },
+        { name: "react-native", color: "pink-text-gradient" },
+      ],
+      image: finvox,
+    },
+    {
+      type: "personal",
       name: "MeetAI: Virtual Meeting Assistant",
-      label: "Personal project",
       description:
         "An AI-powered platform where users create their own AI agent and hold interactive meetings with it, whether for brainstorming ideas, asking questions or getting instant help.",
       tags: [
-        {
-          name: "next.js",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "polar",
-          color: "green-text-gradient",
-        },
-        {
-          name: "neondb",
-          color: "pink-text-gradient",
-        },
+        { name: "next.js", color: "blue-text-gradient" },
+        { name: "polar", color: "green-text-gradient" },
+        { name: "neondb", color: "pink-text-gradient" },
       ],
       image: logo2,
       live_link: "https://meetai-mu.vercel.app/",
       source_code_link: "https://github.com/JagratArora1/meetai",
+    },
+    {
+      type: "personal",
+      name: "Portfolio Website",
+      description:
+        "This site: React 19 and three.js with interactive 3D scenes, a pull-string lamp for light and dark mode, smooth scrolling, a static blog, and pages built for search engines and AI assistants.",
+      tags: [
+        { name: "react", color: "blue-text-gradient" },
+        { name: "three.js", color: "green-text-gradient" },
+        { name: "tailwind", color: "pink-text-gradient" },
+      ],
+      image: portfolio,
+      source_code_link: "https://github.com/JagratArora1/Jagrat_Portfolio",
+    },
+    {
+      type: "personal",
+      name: "Infini: AI SaaS Platform",
+      description:
+        "A SaaS AI platform where users ask questions and generate images, videos and music from prompts.",
+      tags: [
+        { name: "react", color: "blue-text-gradient" },
+        { name: "clerk", color: "green-text-gradient" },
+        { name: "prisma", color: "pink-text-gradient" },
+      ],
+      image: logo1,
     },
   ];
 

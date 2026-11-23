@@ -3,13 +3,14 @@ title: About Jagrat Arora – Full-Stack Software Developer in Faridabad, India
 description: Jagrat Arora is a full-stack software developer at Quikkred in Faridabad, India, building secure fintech products. Experience, projects, skills and FAQs.
 updated: 2026-11-23
 ---
-Jagrat Arora is a full-stack software developer based in Faridabad, Haryana, India. Since January 2026, Jagrat has worked at Quikkred, a digital lending platform in India, building secure fintech products for web and mobile with TypeScript, React, Next.js, React Native and Node.js. Jagrat is the main developer of Finvox, Quikkred's end-to-end encrypted team chat, and writes about end-to-end encryption, security and AI.
+Jagrat Arora is a full-stack software developer based in Faridabad, Haryana, India. Since January 2026, Jagrat has worked at Quikkred, a digital lending platform in India, where Jagrat leads development of the website, loan management CRM and backend, the Quikkred Connect partner app, VIKAM and Finvox, and oversees the entire loan disbursement process. Jagrat builds secure fintech products for web and mobile with TypeScript, React, Next.js, React Native and Node.js, and writes about end-to-end encryption, security and AI.
 
 ## Quick facts
 
 - **Name:** Jagrat Arora
 - **Role:** Full-stack software developer
 - **Company:** Quikkred, a digital lending platform (since January 2026)
+- **Leads:** the Quikkred website, CRM and backend; Quikkred Connect; VIKAM; Finvox; and the loan disbursement process
 - **Location:** Faridabad, Haryana, India
 - **Focus:** secure fintech products, end-to-end encryption, web and mobile apps
 - **Main technologies:** TypeScript, React, Next.js, React Native (Expo), Node.js (Fastify), PostgreSQL, MongoDB, Redis, Docker
@@ -19,11 +20,12 @@ Jagrat Arora is a full-stack software developer based in Faridabad, Haryana, Ind
 
 ## Work at Quikkred
 
-- **Finvox:** main developer of Quikkred's end-to-end encrypted team chat for web and mobile, with MLS group encryption, HPKE device linking, encrypted attachments, read receipts, tenant isolation using PostgreSQL row-level security, and LiveKit voice and video calls.
-- **Quikkred Connect:** built most of this React Native (Expo) app for retail lending partners, including PhonePe and PayU payments over UPI, biometric app lock, push notifications and live support chat.
-- **FluxusForge:** owns disbursal, bank payment files and credit-bureau reporting in Quikkred's multi-tenant lending platform (TypeScript, Fastify, Kysely, React).
-- **Loan management CRM:** shipped features in React 19 and TypeScript, including PhonePe e-mandates, credit-bureau report files, bank disbursement exports, permission controls and OCR receipt capture.
-- **VIKAM:** upgraded the VIKAM money app to Expo SDK 54 with support for 10 languages and hardened its OTP sign-in. Jagrat also led the frontend of Quikkred's internal HR portal.
+Jagrat leads all of these projects and oversees Quikkred's entire loan disbursement process.
+
+- **Website, CRM and backend:** leads the quikkred.in website, the loan management CRM (React 19, TypeScript) and the multi-tenant lending backend (Fastify, Kysely), covering disbursal, bank payment files, PhonePe e-mandates, credit-bureau reporting, permission controls and OCR receipt capture.
+- **Quikkred Connect:** leads the React Native (Expo) app for retail lending partners and built most of it, including PhonePe and PayU payments over UPI, biometric app lock, push notifications and live support chat.
+- **VIKAM:** leads the money and rewards app for India; upgraded it to Expo SDK 54 with support for 10 languages and hardened its OTP sign-in.
+- **Finvox:** leads Quikkred's end-to-end encrypted team chat for web and mobile, with MLS group encryption, HPKE device linking, encrypted attachments, read receipts, tenant isolation using PostgreSQL row-level security, and LiveKit voice and video calls.
 
 ## Earlier experience
 
@@ -34,9 +36,18 @@ Jagrat Arora is a full-stack software developer based in Faridabad, Haryana, Ind
 
 ## Projects
 
-- **Finvox:** end-to-end encrypted team chat (work project, private code).
-- **VIKAM:** a money and rewards app for India in more than 10 languages, built by a small team at Quikkred. [vikam.io](https://vikam.io/)
-- **MeetAI:** a personal project where users create their own AI agent and hold video meetings with it, built with Next.js. [Live site](https://meetai-mu.vercel.app/) · [Source code](https://github.com/JagratArora1/meetai)
+Work projects, all led by Jagrat at Quikkred (private code):
+
+- **Quikkred CRM and lending platform:** the loan management CRM, lending backend and website. [quikkred.in](https://www.quikkred.in/)
+- **VIKAM:** a money and rewards app for India in more than 10 languages. [vikam.io](https://vikam.io/)
+- **Quikkred Connect:** the React Native app for Quikkred's retail lending partners.
+- **Finvox:** an end-to-end encrypted team chat for web and mobile.
+
+Personal projects:
+
+- **MeetAI:** users create their own AI agent and hold video meetings with it, built with Next.js. [Live site](https://meetai-mu.vercel.app/) · [Source code](https://github.com/JagratArora1/meetai)
+- **Portfolio website:** this site, built with React 19 and three.js, with a blog and light and dark mode. [Source code](https://github.com/JagratArora1/Jagrat_Portfolio)
+- **Infini:** a SaaS AI platform for answering questions and generating images, videos and music from prompts.
 
 ## Writing
 
@@ -46,11 +57,11 @@ Jagrat Arora is a full-stack software developer based in Faridabad, Haryana, Ind
 
 ### Who is Jagrat Arora?
 
-Jagrat Arora is a full-stack software developer from Faridabad, India, who works at Quikkred, a digital lending platform. Jagrat builds secure fintech products for web and mobile and is the main developer of Finvox, an end-to-end encrypted team chat.
+Jagrat Arora is a full-stack software developer from Faridabad, India, who works at Quikkred, a digital lending platform. Jagrat leads development of Quikkred's website, loan management CRM and backend, the Quikkred Connect partner app, VIKAM and Finvox, and oversees the entire loan disbursement process.
 
 ### What does Jagrat Arora work on?
 
-At Quikkred, Jagrat Arora is the main developer of Finvox, an end-to-end encrypted team chat; built most of Quikkred Connect, a React Native app for lending partners; and owns disbursal, bank payment files and credit-bureau reporting in FluxusForge, the company's lending platform.
+At Quikkred, Jagrat Arora leads, in order of priority, the quikkred.in website, loan management CRM and lending backend; Quikkred Connect, a React Native app for lending partners; VIKAM, a money and rewards app; and Finvox, an end-to-end encrypted team chat. Jagrat also oversees Quikkred's entire loan disbursement process.
 
 ### Where is Jagrat Arora based?
 

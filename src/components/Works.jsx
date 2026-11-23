@@ -8,7 +8,7 @@ import { styles } from "../styles";
 import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
-import { fadeIn, textVariant } from "../utils/motion";
+import { fadeIn, staggerContainer, textVariant } from "../utils/motion";
 
 // Opens in a new tab; "external link" arrow, drawn inline so it needs no asset.
 const LiveIcon = () => (
@@ -43,7 +43,7 @@ const ProjectCard = ({
   source_code_link,
 }) => {
   return (
-    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
+    <motion.div variants={fadeIn("up", "spring", index * 0.2, 0.75)}>
       <Tilt
         tiltMaxAngleX={45}
         tiltMaxAngleY={45}
@@ -105,6 +105,50 @@ const ProjectCard = ({
   );
 };
 
+const groups = [
+  {
+    type: "work",
+    title: "Work projects",
+    intro:
+      "Products I lead at Quikkred, where I also oversee the entire loan disbursement process. Their code is private, so these cards link to the live product where there is one.",
+  },
+  {
+    type: "personal",
+    title: "Personal projects",
+    intro: "Things I've built on my own.",
+  },
+];
+
+// Each group reveals itself when it scrolls into view. (The section as a
+// whole is too tall on phones for a single trigger.)
+const ProjectGroup = ({ title, intro, items }) => (
+  <motion.div
+    className='mt-16'
+    initial='hidden'
+    whileInView='show'
+    viewport={{ once: true, amount: "some", margin: "0px 0px -15% 0px" }}
+    variants={staggerContainer(0.1)}
+  >
+    <motion.div variants={textVariant()} className='flex flex-wrap items-center gap-3'>
+      <h3 className='text-heading font-bold text-[26px] sm:text-[30px]'>{title}</h3>
+      <span className='rounded-full px-3 py-0.5 text-[13px] font-semibold text-heading bg-black-100'>
+        {items.length}
+      </span>
+    </motion.div>
+    <motion.p
+      variants={fadeIn("", "", 0.1, 0.8)}
+      className='mt-2 text-secondary text-[16px] max-w-3xl leading-[28px]'
+    >
+      {intro}
+    </motion.p>
+    <div className='mt-8 flex flex-wrap gap-7'>
+      {items.map((project, index) => (
+        <ProjectCard key={project.name} index={index} {...project} />
+      ))}
+    </div>
+  </motion.div>
+);
+
 const Works = () => {
   return (
     <>
@@ -118,18 +162,19 @@ const Works = () => {
           variants={fadeIn("", "", 0.1, 1)}
           className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'
         >
-          A few things I&apos;ve built recently. Finvox and VIKAM are products I
-          work on at Quikkred; their code is private, so those cards link to the
-          live product where there is one. Use the buttons on each card to open
-          the live site or the source code.
+          Products I lead at Quikkred, and things I&apos;ve built on my own.
+          Use the buttons on each card to open the live site or the source code.
         </motion.p>
       </div>
 
-      <div className='mt-20 flex flex-wrap gap-7'>
-        {projects.map((project, index) => (
-          <ProjectCard key={`project-${index}`} index={index} {...project} />
-        ))}
-      </div>
+      {groups.map((group) => (
+        <ProjectGroup
+          key={group.type}
+          title={group.title}
+          intro={group.intro}
+          items={projects.filter((project) => project.type === group.type)}
+        />
+      ))}
     </>
   );
 };
