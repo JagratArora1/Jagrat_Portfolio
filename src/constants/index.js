@@ -25,6 +25,7 @@ import {
     quikkredCrm,
     quikkredConnect,
     portfolio,
+    codewarden,
     logo1,
     logo2,
   } from "../assets";
@@ -262,6 +263,18 @@ import {
         { name: "react-native", color: "pink-text-gradient" },
       ],
       image: finvox,
+    },
+    {
+      type: "personal",
+      name: "codewarden: AI Security Reviewer",
+      description:
+        "A GitHub App that reviews pull requests for security issues: Semgrep, gitleaks and OSV-Scanner run in a locked-down Docker sandbox, a durable Temporal workflow posts one review per commit, and Claude triage is built in as schema-validated output. Also a CLI and an MCP server, with an eval harness on OWASP Juice Shop and NodeGoat.",
+      tags: [
+        { name: "typescript", color: "blue-text-gradient" },
+        { name: "temporal", color: "green-text-gradient" },
+        { name: "docker", color: "pink-text-gradient" },
+      ],
+      image: codewarden,
     },
     {
       type: "personal",

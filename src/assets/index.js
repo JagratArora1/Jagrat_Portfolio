@@ -32,6 +32,7 @@ import vikam from "./projects/vikam.webp";
 import quikkredCrm from "./projects/quikkred-crm.webp";
 import quikkredConnect from "./projects/quikkred-connect.webp";
 import portfolio from "./projects/portfolio.webp";
+import codewarden from "./projects/codewarden.svg";
 
 // import meta from "./company/meta.png";
 // import shopify from "./company/shopify.png";
@@ -60,6 +61,7 @@ export {
   cyber,
   cybervidya,
   c,
+  codewarden,
   logo1,
   logo,
   backend,
